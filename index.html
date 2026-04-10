@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LearnSpace — Online Course Platform</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Mulish:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">Learn<span>Space</span></a>
+  <div class="nav-right">
+    <a href="#" class="nav-link">Courses</a>
+    <a href="#" class="nav-link">About</a>
+    <button class="saved-btn" onclick="toggleSavedPanel()">
+      ☆ Saved <span class="saved-count" id="savedCount">0</span>
+    </button>
+  </div>
+</nav>
+<div class="modal-overlay" id="loginModal">
+  <div class="modal">
+    <h2>Login</h2>
+
+    <div class="form-group">
+      <label>Name</label>
+      <input type="text" id="login-name">
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" id="login-email">
+    </div>
+
+    <div class="form-group">
+      <label>Phone</label>
+      <input type="tel" id="login-phone">
+    </div>
+
+    <button class="btn-submit" onclick="loginUser()">Login</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">🎓 Online Course Platform</div>
+  <h1>Learn skills that<br>matter today.</h1>
+  <p>Browse 20+ expert-curated courses across 8 categories. Filter, explore, and enroll in minutes.</p>
+</div>
+
+<!-- SEARCH -->
+<div class="search-bar">
+  <div class="search-inner">
+    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="searchInput" placeholder="Search courses, topics, skills…" oninput="filterCourses()">
+    <button class="search-go">Search</button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-label">Category</div>
+    <div class="category-list" id="categoryList"></div>
+
+    <hr class="sidebar-divider">
+    <div class="sidebar-label">Level</div>
+    <div class="level-filters">
+      <label class="check-label"><input type="checkbox" value="Beginner" onchange="filterCourses()"> Beginner</label>
+      <label class="check-label"><input type="checkbox" value="Intermediate" onchange="filterCourses()"> Intermediate</label>
+      <label class="check-label"><input type="checkbox" value="Advanced" onchange="filterCourses()"> Advanced</label>
+    </div>
+  </aside>
+
+  <!-- COURSES -->
+  <div>
+    <div class="courses-header">
+      <span class="courses-count" id="coursesCount">20 courses</span>
+      <select class="sort-select" onchange="filterCourses()">
+        <option value="default">Sort: Featured</option>
+        <option value="az">A → Z</option>
+        <option value="duration">Duration</option>
+      </select>
+    </div>
+    <div class="courses-grid" id="coursesGrid"></div>
+  </div>
+</div>
+
+<!-- SAVED PANEL -->
+<div class="saved-panel" id="savedPanel">
+  <div class="saved-panel-header">
+    <h3>Saved Courses</h3>
+    <button class="close-panel" onclick="toggleSavedPanel()">✕</button>
+  </div>
+  <div class="saved-list" id="savedList">
+    <div class="saved-empty"><div class="big">☆</div>No saved courses yet.<br>Click the bookmark on any card.</div>
+  </div>
+</div>
+
+<!-- ENROLL MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal">
+    <h2>Enroll Now</h2>
+    <div class="modal-course-name" id="modalCourseName"></div>
+    <div class="form-group">
+      <label>Full Name</label>
+      <input type="text" id="f-name" placeholder="Your name">
+    </div>
+    <div class="form-group">
+      <label>Email Address</label>
+      <input type="email" id="f-email" placeholder="you@email.com">
+    </div>
+    <div class="form-group">
+      <label>Phone Number</label>
+      <input type="tel" id="f-phone" placeholder="+91 00000 00000">
+    </div>
+    <div class="form-group">
+      <label>Experience Level</label>
+      <select id="f-level">
+        <option>I'm a complete beginner</option>
+        <option>I have some experience</option>
+        <option>I'm fairly experienced</option>
+        <option>I'm an expert</option>
+      </select>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+      <button class="btn-submit" onclick="submitEnroll()">Confirm Enrollment →</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
